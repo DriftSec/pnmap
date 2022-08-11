@@ -32,7 +32,6 @@ func (i *fileslice) Set(value string) error {
 	return nil
 }
 
-var HasPorts bool
 var infiles *[]string
 var outfile *string
 var onlyhosts *string
@@ -65,10 +64,9 @@ func combine(args []string) {
 		fmt.Println("[ERROR ] no input files specified")
 		os.Exit(1)
 	}
-
-	HasPorts = *hasports
+	//
+	// HasPorts = *hasports
 	hostmap = make(hostMap)
-
 	final := nmap.NmapRun{}
 	final.Verbose.Level = 0
 	final.Debugging.Level = 0
@@ -168,7 +166,7 @@ func combine(args []string) {
 	}
 
 	// iterate the hosts map and add to final hosts results
-	for k, _ := range hostmap {
+	for k := range hostmap {
 		// if onlyup flag is preset, check for up status
 		if *onlyup && hostmap[k].Status.State != "up" {
 			continue
@@ -185,7 +183,7 @@ func combine(args []string) {
 	final.Args = strings.Join(tmpArgs, " /-/ ")
 
 	// if hasports flag is present call func to remove hosts with no ports
-	if HasPorts {
+	if *hasports {
 		final.Hosts = withPorts(final.Hosts)
 	}
 
@@ -256,6 +254,7 @@ func GetOnlyHosts(hostmap hostMap, onlyfile string) hostMap {
 
 // withPorts removes any hosts that do not have ports open.
 func withPorts(hosts []nmap.Host) []nmap.Host {
+	fmt.Println("[+] Filtering hosts with no ports")
 	ret := []nmap.Host{}
 	for _, h := range hosts {
 		flg := false

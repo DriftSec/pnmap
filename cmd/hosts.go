@@ -25,6 +25,8 @@ import (
 	"github.com/spf13/cobra"
 )
 
+var hasports2 *bool
+
 // hostsCmd represents the hosts command
 var hostsCmd = &cobra.Command{
 	Use:   "hosts [options] <input file/s or *.xml> [more input file/s]",
@@ -37,7 +39,7 @@ var hostsCmd = &cobra.Command{
 
 func init() {
 	rootCmd.AddCommand(hostsCmd)
-	hasports = hostsCmd.Flags().BoolP("has-ports", "p", false, "exclude hosts with no ports open, handy for -Pn scans.")
+	hasports2 = hostsCmd.Flags().BoolP("has-ports", "p", false, "exclude hosts with no ports open, handy for -Pn scans.")
 
 }
 
@@ -47,7 +49,7 @@ func hosts(args []string) {
 		os.Exit(1)
 	}
 
-	HasPorts = *hasports
+	// HasPorts = *hasports
 	var out []string
 	for _, infile := range args {
 		matches, err := filepath.Glob(infile)
@@ -68,7 +70,7 @@ func hosts(args []string) {
 			}
 			for _, hst := range nRun.Hosts {
 				if hst.Status.State == "up" {
-					if HasPorts && len(hst.Ports) < 1 {
+					if *hasports2 && len(hst.Ports) < 1 {
 						continue
 					}
 				}
