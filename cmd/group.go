@@ -66,6 +66,7 @@ func group(args []string) {
 
 		}
 	}
+	//test
 	if !DirExist(*outpath) {
 		err := CreatePathAll(*outpath)
 		if err != nil {
