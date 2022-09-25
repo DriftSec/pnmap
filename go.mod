@@ -1,4 +1,4 @@
-module github.com/driftsec/pnmap
+module github.com/DriftSec/pnmap
 
 go 1.18
 

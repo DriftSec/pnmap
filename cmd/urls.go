@@ -13,7 +13,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/driftsec/pnmap/nmap"
+	"github.com/DriftSec/pnmap/nmap"
 	"github.com/spf13/cobra"
 )
 

@@ -15,7 +15,7 @@ limitations under the License.
 */
 package main
 
-import "github.com/driftsec/pnmap/cmd"
+import "github.com/DriftSec/pnmap/cmd"
 
 func main() {
 	cmd.Execute()

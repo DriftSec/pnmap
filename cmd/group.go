@@ -7,7 +7,7 @@ import (
 	"path/filepath"
 	"strconv"
 
-	"github.com/driftsec/pnmap/nmap"
+	"github.com/DriftSec/pnmap/nmap"
 	"github.com/spf13/cobra"
 )
 
@@ -66,7 +66,6 @@ func group(args []string) {
 
 		}
 	}
-	//test
 	if !DirExist(*outpath) {
 		err := CreatePathAll(*outpath)
 		if err != nil {
